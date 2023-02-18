@@ -7,7 +7,7 @@
     "start": "node --experimental-json-modules server.mjs",
     "test": "set NOTIFICATION_DOCKER_PORT=7878 && node --experimental-json-modules server.mjs"
   },
-  "author": "Elliot_Garcia-Brewer",
+  "author": "Nicolas Clain",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.0.3",

@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://gitlab.com/Maluigion/projet-majeure-5-eti-groupe-1.git"
   },
-  "author": "Jean Cornillon",
+  "author": "Nicolas Clain",
   "license": "ISC",
   "dependencies": {
     "axios": "^1.2.1",
