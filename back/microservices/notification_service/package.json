@@ -1,0 +1,17 @@
+{
+  "name": "notification_service",
+  "version": "1.0.0",
+  "description": "Service de notification : communication serveur vers client par socket",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --experimental-json-modules server.mjs",
+    "test": "set NOTIFICATION_DOCKER_PORT=7878 && node --experimental-json-modules server.mjs"
+  },
+  "author": "Elliot_Garcia-Brewer",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "socket.io": "^4.5.4"
+  }
+}

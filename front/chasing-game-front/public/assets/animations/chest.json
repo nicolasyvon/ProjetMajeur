@@ -1,0 +1,56 @@
+{
+    "frames": [
+        {
+            "filename": "close/0000",
+            "frame": {
+                "x": 1,
+                "y": 0,
+                "w": 30,
+                "h": 32
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 30,
+                "h": 32
+            },
+            "sourceSize": {
+                "w": 30,
+                "h": 32
+            }
+        },
+        {
+            "filename": "close/0001",
+            "frame": {
+                "x": 33,
+                "y": 0,
+                "w": 30,
+                "h": 32
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 30,
+                "h": 32
+            },
+            "sourceSize": {
+                "w": 30,
+                "h": 32
+            }
+        }
+    ],
+    "meta": {
+        "app": "https://www.leshylabs.com/apps/sstool/",
+        "version": "Leshy SpriteSheet Tool v0.8.4",
+        "image": "chest.png",
+        "size": {
+            "w": 64,
+            "h": 32
+        },
+        "scale": 1
+    }
+}

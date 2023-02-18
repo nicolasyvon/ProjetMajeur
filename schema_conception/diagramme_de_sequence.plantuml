@@ -1,0 +1,50 @@
+@startuml Diagramme Séquence
+
+title Chasing Game - Diagramme Séquence
+
+' Players et FrontEnd
+actor Player_1 #LightBlue
+actor Player_2 #LightBlue
+' participant Game #LightBlue
+
+' node.js
+
+participant HomePage #LightBlue
+participant CreateRoomPage #LightBlue
+participant WaitingPage #LightBlue
+participant GameService #LightYellow
+participant GameController #LightYellow
+
+participant MatchHandlerController #LightYellow
+participant MatchHandlerService #LightYellow
+participant MapGeneratorService #LightYellow
+
+
+participant NotifyController #LightYellow
+participant NotifyService #LightYellow
+
+legend right
+    |Color| Type |
+    |<#LightBlue>| ReactJS |
+    |<#LightYellow>| node.js |
+endlegend
+
+note over Player_1, Player_2 #LightSalmon : Création de la room et de la partie
+
+Player_1 -> HomePage : Player 1: Enter Username
+HomePage -> CreateRoomPage : Creating New Room
+CreateRoomPage -> GameService : Clicked on <b>"Create"</b>
+
+GameService -> MapGeneratorService : [http://localhost:5858] <b>POST</b> map_generator/create
+GameService -> MatchHandlerService : [http://localhost:9898] <b>POST</b> match_handler/create
+
+Player_2 -> HomePage : Player 2: Enter Username
+Player_2 -> WaitingPage : Player 2: Join Room
+WaitingPage -> MatchHandlerController  : [http://localhost:9898] <b>POST</b> match_handler/join
+MatchHandlerController -> Notifi  : [http://localhost:9898] <b>POST</b> match_handler/join
+
+NotifyService -\ Player_1 : <b>SOCKET</b>
+NotifyService -\ Player_2 : <b>SOCKET</b>
+
+
+@enduml

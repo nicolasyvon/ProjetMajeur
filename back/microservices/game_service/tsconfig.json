@@ -1,0 +1,13 @@
+{
+    "compilerOptions": 
+    {
+        "target": "es6",
+        "module": "es2015",
+        "noImplicitAny": false, 
+        "strictPropertyInitialization": false, 
+        "moduleResolution": "node",
+        "baseUrl": ".",
+        "forceConsistentCasingInFileNames": true,
+        "strict": true
+    }
+}

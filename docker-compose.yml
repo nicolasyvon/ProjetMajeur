@@ -1,0 +1,102 @@
+version: "3.8"
+
+services:
+  react:
+    container_name: react
+
+    env_file: ./.env
+    build:
+      context: .\front\chasing-game-front
+      args:
+        - REACT_APP_API_BASE_URL=$CLIENT_API_BASE_URL
+    ports:
+      - $REACT_LOCAL_PORT:$REACT_DOCKER_PORT
+    networks:
+      - frontend
+  proxy:
+    container_name: "proxy"
+    build: .\back\proxy
+    env_file: ./.env
+    environment:
+      - CLIENT_ORIGIN=$CLIENT_ORIGIN
+      - NOTIFICATION_DOCKER_PORT=$NOTIFICATION_DOCKER_PORT
+      - MATCH_HANDLER_LOCAL_PORT=$MATCH_HANDLER_DOCKER_PORT
+      - MAPGENERATOR_DOCKER_PORT=$MAPGENERATOR_DOCKER_PORT
+      - IANPC_DOCKER_PORT=$IANPC_DOCKER_PORT
+      - GAME_DOCKER_PORT=$GAME_DOCKER_PORT
+      - PROXY_DOCKER_PORT=$PROXY_DOCKER_PORT
+      - REACT_DOCKER_PORT=$REACT_DOCKER_PORT
+      - DISCORD_DOCKER_PORT=$DISCORD_DOCKER_PORT
+      
+    ports:
+      - $PROXY_LOCAL_PORT:$PROXY_DOCKER_PORT        
+    networks:
+      - backend
+      - frontend
+          
+  notification-service:
+      container_name: notification-service        
+      build: .\back\microservices\notification_service
+      command: npm start
+      env_file: ./.env
+      ports:
+        - $NOTIFICATION_LOCAL_PORT:$NOTIFICATION_DOCKER_PORT
+      networks:
+        - backend
+
+  match_handler-service:
+      container_name: match_handler-service        
+      build: .\back\microservices\match_handler_service
+      command: npm start
+      env_file: ./.env
+      ports:
+        - $MATCH_HANDLER_LOCAL_PORT:$MATCH_HANDLER_DOCKER_PORT
+      networks:
+        - backend
+
+  game-service:
+          container_name: game-service
+          build: .\back\microservices\game_service
+          command: npm start
+          env_file: ./.env
+          ports:
+            - $GAME_LOCAL_PORT:$GAME_DOCKER_PORT
+          networks:
+            - backend
+
+  mapgenerator-service:
+      container_name: mapgenerator-service
+      build: .\back\microservices\mapgenerator_service
+      command: npm start
+      env_file: ./.env
+      ports:
+      - $MAPGENERATOR_LOCAL_PORT:$MAPGENERATOR_DOCKER_PORT
+      networks:
+      - backend
+      
+networks:
+  backend:
+  frontend:
+
+
+    # ianpc-service:
+    #     container_name: ianpc-service
+    #     build: .\back\microservices\ianpc_service
+    #     command: npm start
+    #     env_file: ./.env
+    #     ports:
+    #       - $IANPC_LOCAL_PORT:$IANPC_DOCKER_PORT
+    #     networks:
+    #       - backend
+
+   
+
+    # discord-service:
+    #     container_name: discord-service
+    #     build: .\back\microservices\discord_service
+    #     command: npm start
+    #     env_file: ./.env
+    #     ports:
+    #       - $DISCORD_LOCAL_PORT:$DISCORD_DOCKER_PORT
+    #     networks:
+    #       - backend
